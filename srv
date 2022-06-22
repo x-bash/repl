@@ -1,4 +1,6 @@
 
+[ -z "$BASH_VERSION" ] || shopt -s expand_aliases
+
 function ___x_cmd_repl_srv(){
     NAME="${1:-$$}"
 
