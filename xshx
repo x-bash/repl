@@ -1,9 +1,0 @@
-rm "$TMPDIR/input.$$"
-rm "$TMPDIR/input.$$"
-
-mkfifo input
-mkfifo output
-
-while read -r l; do
-    echo "$l"
-done <input | bash >>output

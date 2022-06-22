@@ -1,5 +1,0 @@
-(cat stdout) >&1 &
-(cat stderr) >&2 &
-while read -r line; do
-    printf "%s\n" "$line" >stdin
-done
