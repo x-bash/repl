@@ -1,9 +1,15 @@
 
-NAME="${1:?Provide name}"
+___x_cmd_repl_cli(){
 
-(cat "$TMPDIR/stdout.${NAME}") >&1 &
-(cat "$TMPDIR/stderr.${NAME}") >&2 &
+    local NAME="${1:?Provide name}"
 
-while read -r line; do
-    printf "%s\n" "$line" >"$TMPDIR/stdin.${NAME}"
-done
+    (cat "$TMPDIR/stdout.${NAME}") >&1 &
+    (cat "$TMPDIR/stderr.${NAME}") >&2 &
+
+    while read -r line; do
+        printf "%s\n" "$line" >"$TMPDIR/stdin.${NAME}"
+    done
+
+}
+
+___x_cmd_repl_cli "$@"

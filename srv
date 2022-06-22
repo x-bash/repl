@@ -1,13 +1,20 @@
-rm "$TMPDIR/stdin.$$" "$TMPDIR/stdout.$$" "$TMPDIR/stderr.$$" 2>/dev/null
 
-mkfifo "$TMPDIR/stdin.$$" "$TMPDIR/stdout.$$" "$TMPDIR/stderr.$$"
+function ___x_cmd_repl_srv(){
+    NAME="${1:-$$}"
 
-printf "%s" "Name is $$" >&2
+    rm "$TMPDIR/stdin.$$" "$TMPDIR/stdout.$$" "$TMPDIR/stderr.$$" 2>/dev/null
 
-while :; do
-    read -r line
-    case "$line" in
-        "%exit")    break ;;
-    esac
-    eval "$line"
-done <"$TMPDIR/stdin.$$" >>"$TMPDIR/stdout.$$" 2>>"$TMPDIR/stderr.$$"
+    mkfifo "$TMPDIR/stdin.$$" "$TMPDIR/stdout.$$" "$TMPDIR/stderr.$$"
+
+    printf "%s" "Name is $$" >&2
+
+    while :; do
+        read -r line
+        case "$line" in
+            "%exit")    break ;;
+        esac
+        eval "$line"
+    done <"$TMPDIR/stdin.$$" >>"$TMPDIR/stdout.$$" 2>>"$TMPDIR/stderr.$$"
+}
+
+___x_cmd_repl_srv "$@"
