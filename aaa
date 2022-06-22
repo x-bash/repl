@@ -1,0 +1,14 @@
+
+
+[ -z "$BASH_VERSION" ] || shopt -s expand_aliases
+
+f(){
+    alias $1=echo
+}
+
+g(){
+    f abc
+    eval abc hi
+}
+
+g
