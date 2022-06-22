@@ -1,0 +1,16 @@
+rm "$TMPDIR/stdin.$$"
+rm "$TMPDIR/stdout.$$"
+rm "$TMPDIR/stderr.$$"
+
+mkfifo
+
+rm stdout stderr
+mkfifo stdout stderr
+
+while :; do
+    read -r line
+    case "$line" in
+        "%exit")    break ;;
+    esac
+    eval "$line"
+done <"$TMPDIR/stdin.$$" >>"$TMPDIR/stdout.$$" 2>>"$TMPDIR/stderr.$$"
