@@ -1,11 +1,8 @@
-rm "$TMPDIR/stdin.$$"
-rm "$TMPDIR/stdout.$$"
-rm "$TMPDIR/stderr.$$"
+rm "$TMPDIR/stdin.$$" "$TMPDIR/stdout.$$" "$TMPDIR/stderr.$$" 2>/dev/null
 
-mkfifo
+mkfifo "$TMPDIR/stdin.$$" "$TMPDIR/stdout.$$" "$TMPDIR/stderr.$$"
 
-rm stdout stderr
-mkfifo stdout stderr
+printf "%s" "Name is $$" >&2
 
 while :; do
     read -r line

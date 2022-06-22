@@ -1,7 +1,9 @@
+
 NAME="${1:?Provide name}"
 
-(cat "${TMPDIR}/stdout.${NAME}") >&1 &
-(cat "${TMPDIR}/stderr.${NAME}") >&2 &
+(cat "$TMPDIR/stdout.${NAME}") >&1 &
+(cat "$TMPDIR/stderr.${NAME}") >&2 &
+
 while read -r line; do
-    printf "%s\n" "$line" >stdin
+    printf "%s\n" "$line" >"$TMPDIR/stdin.${NAME}"
 done
